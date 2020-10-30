@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="hdmi_3">
+		<CBX_INST_ENTRY INSTANCE_NAME="|top|pll:b2v_inst|altpll:altpll_component" CBX_FILE_NAME="pll_altpll1.v"/>
+	</PROJECT>
+</LOG_ROOT>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pin_planner>
+	<pin_info>
+		<pin name="tdm_clk_n" source="Assignments" diff_pair_node="tdm_clk_p" >
+		</pin>
+		<pin name="tdm_clk_p" source="Assignments" diff_pair_node="tdm_clk_n" >
+		</pin>
+		<pin name="tdm_0_n" source="Assignments" diff_pair_node="tdm_0_p" >
+		</pin>
+		<pin name="tdm_0_p" source="Assignments" diff_pair_node="tdm_0_n" >
+		</pin>
+		<pin name="tdm_1_n" source="Assignments" diff_pair_node="tdm_1_p" >
+		</pin>
+		<pin name="tdm_1_p" source="Assignments" diff_pair_node="tdm_1_n" >
+		</pin>
+		<pin name="tdm_2_n" source="Assignments" diff_pair_node="tdm_2_p" >
+		</pin>
+		<pin name="tdm_2_p" source="Assignments" diff_pair_node="tdm_2_n" >
+		</pin>
+	</pin_info>
+	<buses>
+	</buses>
+	<group_file_association>
+	</group_file_association>
+	<pin_planner_file_specifies>
+	</pin_planner_file_specifies>
+</pin_planner>

@@ -1,0 +1,183 @@
+|top
+sys_clk => sys_clk.IN1
+LED1 <= Divider:b2v_div1.sig_out
+LED2 <= Divider:b2v_div3.sig_out
+LED3 <= Divider:b2v_div2.sig_out
+
+
+|top|pll:b2v_inst
+areset => altpll:altpll_component.areset
+inclk0 => altpll:altpll_component.inclk[0]
+c0 <= altpll:altpll_component.clk[0]
+c1 <= altpll:altpll_component.clk[1]
+c2 <= altpll:altpll_component.clk[2]
+c3 <= altpll:altpll_component.clk[3]
+
+
+|top|pll:b2v_inst|altpll:altpll_component
+inclk[0] => pll_altpll1:auto_generated.inclk[0]
+inclk[1] => pll_altpll1:auto_generated.inclk[1]
+fbin => ~NO_FANOUT~
+pllena => ~NO_FANOUT~
+clkswitch => ~NO_FANOUT~
+areset => pll_altpll1:auto_generated.areset
+pfdena => ~NO_FANOUT~
+clkena[0] => ~NO_FANOUT~
+clkena[1] => ~NO_FANOUT~
+clkena[2] => ~NO_FANOUT~
+clkena[3] => ~NO_FANOUT~
+clkena[4] => ~NO_FANOUT~
+clkena[5] => ~NO_FANOUT~
+extclkena[0] => ~NO_FANOUT~
+extclkena[1] => ~NO_FANOUT~
+extclkena[2] => ~NO_FANOUT~
+extclkena[3] => ~NO_FANOUT~
+scanclk => ~NO_FANOUT~
+scanclkena => ~NO_FANOUT~
+scanaclr => ~NO_FANOUT~
+scanread => ~NO_FANOUT~
+scanwrite => ~NO_FANOUT~
+scandata => ~NO_FANOUT~
+phasecounterselect[0] => ~NO_FANOUT~
+phasecounterselect[1] => ~NO_FANOUT~
+phasecounterselect[2] => ~NO_FANOUT~
+phasecounterselect[3] => ~NO_FANOUT~
+phaseupdown => ~NO_FANOUT~
+phasestep => ~NO_FANOUT~
+configupdate => ~NO_FANOUT~
+fbmimicbidir <> <GND>
+clk[0] <= clk[0].DB_MAX_OUTPUT_PORT_TYPE
+clk[1] <= clk[1].DB_MAX_OUTPUT_PORT_TYPE
+clk[2] <= clk[2].DB_MAX_OUTPUT_PORT_TYPE
+clk[3] <= clk[3].DB_MAX_OUTPUT_PORT_TYPE
+clk[4] <= clk[4].DB_MAX_OUTPUT_PORT_TYPE
+extclk[0] <= <GND>
+extclk[1] <= <GND>
+extclk[2] <= <GND>
+extclk[3] <= <GND>
+clkbad[0] <= <GND>
+clkbad[1] <= <GND>
+enable1 <= <GND>
+enable0 <= <GND>
+activeclock <= <GND>
+clkloss <= <GND>
+locked <= <GND>
+scandataout <= <GND>
+scandone <= <GND>
+sclkout0 <= <GND>
+sclkout1 <= <GND>
+phasedone <= <GND>
+vcooverrange <= <GND>
+vcounderrange <= <GND>
+fbout <= <GND>
+fref <= <GND>
+icdrclk <= <GND>
+
+
+|top|pll:b2v_inst|altpll:altpll_component|pll_altpll1:auto_generated
+areset => pll1.ARESET
+clk[0] <= pll1.CLK
+clk[1] <= pll1.CLK1
+clk[2] <= pll1.CLK2
+clk[3] <= pll1.CLK3
+clk[4] <= pll1.CLK4
+inclk[0] => pll1.CLK
+inclk[1] => pll1.CLK1
+
+
+|top|Divider:b2v_div1
+sig_in => counter[0].CLK
+sig_in => counter[1].CLK
+sig_in => counter[2].CLK
+sig_in => counter[3].CLK
+sig_in => counter[4].CLK
+sig_in => counter[5].CLK
+sig_in => counter[6].CLK
+sig_in => counter[7].CLK
+sig_in => counter[8].CLK
+sig_in => counter[9].CLK
+sig_in => counter[10].CLK
+sig_in => counter[11].CLK
+sig_in => counter[12].CLK
+sig_in => counter[13].CLK
+sig_in => counter[14].CLK
+sig_in => counter[15].CLK
+sig_in => counter[16].CLK
+sig_in => counter[17].CLK
+sig_in => counter[18].CLK
+sig_in => counter[19].CLK
+sig_in => counter[20].CLK
+sig_in => counter[21].CLK
+sig_in => counter[22].CLK
+sig_in => counter[23].CLK
+sig_in => counter[24].CLK
+sig_in => counter[25].CLK
+sig_in => counter[26].CLK
+sig_in => counter[27].CLK
+sig_out <= LessThan1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|top|Divider:b2v_div2
+sig_in => counter[0].CLK
+sig_in => counter[1].CLK
+sig_in => counter[2].CLK
+sig_in => counter[3].CLK
+sig_in => counter[4].CLK
+sig_in => counter[5].CLK
+sig_in => counter[6].CLK
+sig_in => counter[7].CLK
+sig_in => counter[8].CLK
+sig_in => counter[9].CLK
+sig_in => counter[10].CLK
+sig_in => counter[11].CLK
+sig_in => counter[12].CLK
+sig_in => counter[13].CLK
+sig_in => counter[14].CLK
+sig_in => counter[15].CLK
+sig_in => counter[16].CLK
+sig_in => counter[17].CLK
+sig_in => counter[18].CLK
+sig_in => counter[19].CLK
+sig_in => counter[20].CLK
+sig_in => counter[21].CLK
+sig_in => counter[22].CLK
+sig_in => counter[23].CLK
+sig_in => counter[24].CLK
+sig_in => counter[25].CLK
+sig_in => counter[26].CLK
+sig_in => counter[27].CLK
+sig_out <= LessThan1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|top|Divider:b2v_div3
+sig_in => counter[0].CLK
+sig_in => counter[1].CLK
+sig_in => counter[2].CLK
+sig_in => counter[3].CLK
+sig_in => counter[4].CLK
+sig_in => counter[5].CLK
+sig_in => counter[6].CLK
+sig_in => counter[7].CLK
+sig_in => counter[8].CLK
+sig_in => counter[9].CLK
+sig_in => counter[10].CLK
+sig_in => counter[11].CLK
+sig_in => counter[12].CLK
+sig_in => counter[13].CLK
+sig_in => counter[14].CLK
+sig_in => counter[15].CLK
+sig_in => counter[16].CLK
+sig_in => counter[17].CLK
+sig_in => counter[18].CLK
+sig_in => counter[19].CLK
+sig_in => counter[20].CLK
+sig_in => counter[21].CLK
+sig_in => counter[22].CLK
+sig_in => counter[23].CLK
+sig_in => counter[24].CLK
+sig_in => counter[25].CLK
+sig_in => counter[26].CLK
+sig_in => counter[27].CLK
+sig_out <= LessThan1.DB_MAX_OUTPUT_PORT_TYPE
+
+
