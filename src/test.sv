@@ -1,20 +1,31 @@
-module hdmi_3(
-	CLKIN,
+module Test(
+	CLK,
 	LED1,
 	LED2,
 	LED3
 );
 
 
-input wire	CLKIN;
+input wire	CLK;
 output wire	LED1;
 output wire	LED2;
 output wire	LED3;
 
+//frequency generator
+wire	clk_50;
 wire	clk_25;
 wire	clk_250;
 wire	clk_32;
-wire	clk_50;
+
+pll	b2v_inst(
+	.inclk0(CLK),
+	.c0(clk_50),
+	.c1(clk_25),
+	.c2(clk_250),
+	.c3(clk_32)	
+	);
+
+
 
 Divider	b2v_div1(
 	.sig_in(clk_50),
@@ -31,12 +42,6 @@ Divider	b2v_div3(
 	.sig_out(LED2));
 	defparam	b2v_div3.DIVISOR = 50000000;
 
-pll	b2v_inst(
-	.inclk0(clk_50),
-	.c0(clk_25),
-	.c1(clk_250)
-	);
 
-assign	clk_50 = CLKIN;
 
 endmodule
