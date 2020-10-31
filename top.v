@@ -16,9 +16,7 @@ module top
 (
 // {ALTERA_ARGS_BEGIN} DO NOT REMOVE THIS LINE!
 
-	LED1,
-	LED2,
-	LED3,
+
 	P3_2,
 	P3_3,
 	P3_4,
@@ -41,23 +39,23 @@ module top
 	P8_14,
 	P8_15,
 	P8_16,
-	S1,
-	S2,
-	S3,
+
 	SDA,
 	SDC,
+
 	sys_clk,
-	tdm_tx1_p,
-	TX,
-	RX
+
+	lvds_txclk,
+	uart_tx,
+	uart_rx,
+	button,
+	lvds_tx,
+	led
 // {ALTERA_ARGS_END} DO NOT REMOVE THIS LINE!
 
 );
 
 // {ALTERA_IO_BEGIN} DO NOT REMOVE THIS LINE!
-output			LED1;
-output			LED2;
-output			LED3;
 input			P3_2;
 input			P3_3;
 input			P3_4;
@@ -80,45 +78,34 @@ input			P8_13;
 input			P8_14;
 input			P8_15;
 input			P8_16;
-input			S1;
-input			S2;
-input			S3;
+
 input			SDA;
 input			SDC;
+
 input			sys_clk;
-input			tdm_tx1_p;
-input			TX;
-input			RX;
+
+output			lvds_txclk;
+output			uart_tx;
+input			uart_rx;
+input	[0:2]	button;
+output	[0:2]	lvds_tx;
+output	[0:2]	led;
 
 // {ALTERA_IO_END} DO NOT REMOVE THIS LINE!
 // {ALTERA_MODULE_BEGIN} DO NOT REMOVE THIS LINE!
-	
-//`include "src/test.sv"
 
 Test test(
 	.CLK(sys_clk),
-	.LED1(LED1),
-	.LED2(LED2),
-	.LED3(LED3)
+	.LED1(led[0]),
+	.LED2(led[1]),
+	.LED3(led[2])
 );
 
-///////////////////////////////////////
-// Interconnecting internal signals //
-/////////////////////////////////////
-wire cmd_rdy;					// command from wireless ready
-wire [7:0] cmd;				// 8-bit command from wireless
-wire [15:0] data;				// 16-bit data from wireless
-wire clr_cmd_rdy;				// clear the command from wireless
-wire [7:0] resp;				// response to wireless
-wire send_resp;				// asserted to send response to wireless
-wire resp_sent;				// indicates response to wireless has been sent
-/////////////////////////////////////////////////////////////////////////
-// Instantiate UART_wrapper that receives commands from wireless link //
-/////////////////////////////////////////////////////////////////////// 
-UART_wrapper iUART_WRAP(.clr_cmd_rdy(clr_cmd_rdy), .cmd_rdy(cmd_rdy), .snd_resp(send_resp), .resp_sent(resp_sent), 
-	.cmd(cmd), .data(data), .resp(resp), .clk(sys_clk), .rst_n(S1), .RX(RX), .TX(TX));
 // {ALTERA_MODULE_END} DO NOT REMOVE THIS LINE!
 endmodule
+
+
+
 
 
 
