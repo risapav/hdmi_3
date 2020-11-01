@@ -173,6 +173,11 @@ set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 
 #hierarchy
 set_global_assignment -name TOP_LEVEL_ENTITY top
+
+#set_global_assignment -name QIP_FILE library/hdmi/hdmi.qip
+
+
+set_global_assignment -name SYSTEMVERILOG_FILE src/app.sv
 set_global_assignment -name VERILOG_FILE top.v
 set_global_assignment -name VERILOG_FILE library/uart/uart_tx.v
 set_global_assignment -name SYSTEMVERILOG_FILE library/uart/uart_rcv.sv
@@ -182,8 +187,4 @@ set_global_assignment -name SYSTEMVERILOG_FILE src/test.sv
 set_global_assignment -name SDC_FILE board/clock.sdc
 set_global_assignment -name CDF_FILE board/chain.cdf
 set_global_assignment -name QIP_FILE library/pll/pll.qip
-
-#set_global_assignment -name QIP_FILE library/hdmi/hdmi.qip
-
-
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

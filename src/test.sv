@@ -12,12 +12,12 @@ Divider	b2v_div1(
 
 Divider	b2v_div2(
 	.sig_in(CLK2),
-	.sig_out(LED3));
+	.sig_out(LED2));
 	defparam	b2v_div2.DIVISOR = 50000000;
 
 Divider	b2v_div3(
 	.sig_in(CLK3),
-	.sig_out(LED2));
+	.sig_out(LED3));
 	defparam	b2v_div3.DIVISOR = 50000000;
 
 endmodule
