@@ -116,8 +116,8 @@ App app(
 	.clk_pixel(clk_25), 
 	.clk_pixel_x10(clk_250), 
 	.clk_audio(clk_32),
-	.tmds_p(), 
-	.tmds_clock_p(), 
+	.tmds_p({lvds_tx[0],lvds_tx[1],lvds_tx[2]}), 
+	.tmds_clock_p(lvds_tx[3]), 
 	.tmds_n(), 
 	.tmds_clock_n()
 	);
