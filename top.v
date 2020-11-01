@@ -101,11 +101,26 @@ pll	b2v_inst(
 //end of frequency generator
 
 //test clock
-Test test(.CLK1(clk_25), .CLK2(clk_250), .CLK3(clk_32), .LED1(led[0]),.LED2(led[1]),.LED3(led[2]));
+Test test(
+	.CLK1(clk_25), 
+	.CLK2(clk_250), 
+	.CLK3(clk_32), 
+	.LED1(led[0]),
+	.LED2(led[1]),
+	.LED3(led[2])
+	);
 //end of test clock
 
 //hdmi app
-App app(.clk_pixel(clk_25), .clk_pixel_x10(clk_250), .clk_audio(clk_32));
+App app(
+	.clk_pixel(clk_25), 
+	.clk_pixel_x10(clk_250), 
+	.clk_audio(clk_32),
+	.tmds_p(), 
+	.tmds_clock_p(), 
+	.tmds_n(), 
+	.tmds_clock_n()
+	);
 //end of hdmi app
 
 
