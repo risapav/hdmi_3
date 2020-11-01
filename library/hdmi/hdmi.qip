@@ -1,0 +1,8 @@
+set_global_assignment -name IP_TOOL_NAME "ALTLVDS_TX"
+set_global_assignment -name IP_TOOL_VERSION "13.0"
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "hdmi.vhd"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "hdmi.bsf"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "hdmi_inst.vhd"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "hdmi.inc"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "hdmi.cmp"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "hdmi.ppf"]

@@ -42,11 +42,10 @@ module top
 	SDC,
 	button,
 	led,
+	lvds_tx,
 	sys_clk,
 	uart_rx,
 	uart_tx,
-	lvds_tx*,
-	lvds_tx_n
 // {ALTERA_ARGS_END} DO NOT REMOVE THIS LINE!
 
 );
@@ -78,21 +77,33 @@ input			SDA;
 input			SDC;
 input	[0:2]	button;
 output	[0:2]	led;
+output	[0:3]	lvds_tx;
 input			sys_clk;
 input			uart_rx;
 output			uart_tx;
-input			lvds_tx*;
-input	[3:3]	lvds_tx_n;
 
 // {ALTERA_IO_END} DO NOT REMOVE THIS LINE!
 // {ALTERA_MODULE_BEGIN} DO NOT REMOVE THIS LINE!
+
+//frequency generator
+wire	clk_50;
+wire	clk_25;
+wire	clk_250;
+wire	clk_32;
+
+pll	b2v_inst(
+	.inclk0(sys_clk),
+	.c0(clk_50),
+	.c1(clk_25),
+	.c2(clk_250),
+	.c3(clk_32)	
+	);
+//end of frequency generator
+
+//test clock
+Test test(.CLK1(clk_25), .CLK2(clk_250), .CLK3(clk_32), .LED1(led[0]),.LED2(led[1]),.LED3(led[2]));
+
+//end of test clock
+
 // {ALTERA_MODULE_END} DO NOT REMOVE THIS LINE!
 endmodule
-
-
-
-
-
-
-
-
