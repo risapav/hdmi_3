@@ -16,7 +16,6 @@ module top
 (
 // {ALTERA_ARGS_BEGIN} DO NOT REMOVE THIS LINE!
 
-
 	P3_2,
 	P3_3,
 	P3_4,
@@ -39,18 +38,15 @@ module top
 	P8_14,
 	P8_15,
 	P8_16,
-
 	SDA,
 	SDC,
-
-	sys_clk,
-
-	lvds_txclk,
-	uart_tx,
-	uart_rx,
 	button,
-	lvds_tx,
-	led
+	led,
+	sys_clk,
+	uart_rx,
+	uart_tx,
+	lvds_tx*,
+	lvds_tx_n
 // {ALTERA_ARGS_END} DO NOT REMOVE THIS LINE!
 
 );
@@ -78,31 +74,21 @@ input			P8_13;
 input			P8_14;
 input			P8_15;
 input			P8_16;
-
 input			SDA;
 input			SDC;
-
-input			sys_clk;
-
-output			lvds_txclk;
-output			uart_tx;
-input			uart_rx;
 input	[0:2]	button;
-output	[0:2]	lvds_tx;
 output	[0:2]	led;
+input			sys_clk;
+input			uart_rx;
+output			uart_tx;
+input			lvds_tx*;
+input	[3:3]	lvds_tx_n;
 
 // {ALTERA_IO_END} DO NOT REMOVE THIS LINE!
 // {ALTERA_MODULE_BEGIN} DO NOT REMOVE THIS LINE!
-
-Test test(
-	.CLK(sys_clk),
-	.LED1(led[0]),
-	.LED2(led[1]),
-	.LED3(led[2])
-);
-
 // {ALTERA_MODULE_END} DO NOT REMOVE THIS LINE!
 endmodule
+
 
 
 
