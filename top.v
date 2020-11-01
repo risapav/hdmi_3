@@ -87,8 +87,8 @@ output		uart_tx;
 
 //frequency generator
 wire	clk_50;
-wire	pixel_clk;
-wire	pixel_clk10;
+wire	clk_25;
+wire	clk_250;
 wire	clk_32;
 
 pll	b2v_inst(
@@ -105,7 +105,7 @@ Test test(.CLK1(clk_25), .CLK2(clk_250), .CLK3(clk_32), .LED1(led[0]),.LED2(led[
 //end of test clock
 
 //hdmi app
-App app(.pixel_clk(clk_25), .pixel_clk10(clk_250), .clk(clk_32));
+App app(.clk_pixel(clk_25), .clk_pixel_x10(clk_250), .clk_audio(clk_32));
 //end of hdmi app
 
 
