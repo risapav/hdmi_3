@@ -43,6 +43,7 @@ module top
 	button,
 	led,
 	lvds_tx,
+	lvds_tx_n,
 	sys_clk,
 	uart_rx,
 	uart_tx,
@@ -75,9 +76,10 @@ input			P8_15;
 input			P8_16;
 input			SDA;
 input			SDC;
-input	[0:2]	button;
+input		[0:2]	button;
 output	[0:2]	led;
 output	[0:3]	lvds_tx;
+output	[0:3]	lvds_tx_n;
 input			sys_clk;
 input			uart_rx;
 output		uart_tx;
@@ -86,25 +88,26 @@ output		uart_tx;
 // {ALTERA_MODULE_BEGIN} DO NOT REMOVE THIS LINE!
 
 //frequency generator
-wire	clk_50;
-wire	clk_25;
-wire	clk_250;
-wire	clk_32;
+wire	pixel_clk;
+wire	pixel_clk10;
+wire	audio_clk;
+wire	atari_clk;
 
-pll	b2v_inst(
+pll	clock(
 	.inclk0(sys_clk),
-	.c0(clk_50),
-	.c1(clk_25),
-	.c2(clk_250),
-	.c3(clk_32)	
+	.c0(pixel_clk),
+	.c1(pixel_clk10),
+	.c2(audio_clk),
+	.c3(atari_clk),
+		
 	);
 //end of frequency generator
 
 //test clock
 Test test(
-	.CLK1(clk_25), 
-	.CLK2(clk_250), 
-	.CLK3(clk_32), 
+	.CLK1(pixel_clk), 
+	.CLK2(pixel_clk10), 
+	.CLK3(audio_clk), 
 	.LED1(led[0]),
 	.LED2(led[1]),
 	.LED3(led[2])
@@ -113,13 +116,13 @@ Test test(
 
 //hdmi app
 App app(
-	.clk_pixel(clk_25), 
-	.clk_pixel_x10(clk_250), 
-	.clk_audio(clk_32),
+	.clk_pixel(pixel_clk), 
+	.clk_pixel_x10(pixel_clk10), 
+	.clk_audio(audio_clk),
 	.tmds_p({lvds_tx[0],lvds_tx[1],lvds_tx[2]}), 
 	.tmds_clock_p(lvds_tx[3]), 
-	.tmds_n(), 
-	.tmds_clock_n()
+	.tmds_n({lvds_tx_n[0],lvds_tx_n[1],lvds_tx_n[2]}), 
+	.tmds_clock_n(lvds_tx_n[3])
 	);
 //end of hdmi app
 

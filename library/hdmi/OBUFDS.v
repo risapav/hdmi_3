@@ -49,8 +49,8 @@
 			.INVERT_OE_INCLOCK                        ("false"),
 			.ENABLE_PHASE_DETECTOR_FOR_CK             ("false")
 		) obufds_inst (
-			.din             (din),       //       din.export
-			.pad_out         (pad_out),   //   pad_out.export
+			.din             (din),       //	din.export
+			.pad_out         (pad_out),   //	pad_out.export
 			.pad_out_b       (pad_out_b), // pad_out_b.export
 			.outclocken      (1'b1),      // (terminated)
 			.inclock         (1'b0),      // (terminated)
