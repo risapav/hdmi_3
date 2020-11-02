@@ -34,31 +34,31 @@ module source_product_description_info_frame
 	genvar i;
 	generate
 		for (i = 0; i < 8; i++)
-		begin: vendor_to_bytes
-			assign vendor_name[i] = VENDOR_NAME[(7-i+1)*8-1:(7-i)*8];
-		end
+			begin: vendor_to_bytes
+				assign vendor_name[i] = VENDOR_NAME[(7-i+1)*8-1:(7-i)*8];
+			end
 		for (i = 0; i < 16; i++)
-		begin: product_to_bytes
-			assign product_description[i] = PRODUCT_DESCRIPTION[(15-i+1)*8-1:(15-i)*8];
-		end
+			begin: product_to_bytes
+				assign product_description[i] = PRODUCT_DESCRIPTION[(15-i+1)*8-1:(15-i)*8];
+			end
 
 		for (i = 1; i < 9; i++)
-		begin: pb_vendor
-			assign packet_bytes[i] = vendor_name[i - 1] == 8'h30 ? 8'h00 : vendor_name[i - 1];
-		end
+			begin: pb_vendor
+				assign packet_bytes[i] = vendor_name[i - 1] == 8'h30 ? 8'h00 : vendor_name[i - 1];
+			end
 		for (i = 9; i < LENGTH; i++)
-		begin: pb_product
-			assign packet_bytes[i] = product_description[i - 9] == 8'h30 ? 8'h00 : product_description[i - 9];
-		end
+			begin: pb_product
+				assign packet_bytes[i] = product_description[i - 9] == 8'h30 ? 8'h00 : product_description[i - 9];
+			end
 		assign packet_bytes[LENGTH] = SOURCE_DEVICE_INFORMATION;
 		for (i = 26; i < 28; i++)
-		begin: pb_reserved
-			assign packet_bytes[i] = 8'd0;
-		end
+			begin: pb_reserved
+				assign packet_bytes[i] = 8'd0;
+			end
 		for (i = 0; i < 4; i++)
-		begin: pb_to_sub
-			assign sub[i] = {packet_bytes[6 + i*7], packet_bytes[5 + i*7], packet_bytes[4 + i*7], packet_bytes[3 + i*7], packet_bytes[2 + i*7], packet_bytes[1 + i*7], packet_bytes[0 + i*7]};
-		end
+			begin: pb_to_sub
+				assign sub[i] = {packet_bytes[6 + i*7], packet_bytes[5 + i*7], packet_bytes[4 + i*7], packet_bytes[3 + i*7], packet_bytes[2 + i*7], packet_bytes[1 + i*7], packet_bytes[0 + i*7]};
+			end
 	endgenerate
 
 endmodule

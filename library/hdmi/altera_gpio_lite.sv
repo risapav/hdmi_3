@@ -132,7 +132,7 @@ module altgpio_one_bit(
 							.areset(aset),
 							.ena(outclocken_wire),
 							.phymemclock(phy_mem_clock)
-							`ifndef ALTERA_RESERVED_QIS
+						`ifndef ALTERA_RESERVED_QIS
 							,
 							.clk (outclock_wire),
 							.sreset(1'b0),
@@ -140,7 +140,7 @@ module altgpio_one_bit(
 							.dffhi(),
 							.devpor(1'b1),
 							.devclrn(1'b1)
-							`endif
+						`endif
 						);
 					end
 				else if (SYNC_MODE != "none")
@@ -163,7 +163,7 @@ module altgpio_one_bit(
 							.sreset(sclr),
 							.ena(outclocken_wire),
 							.phymemclock(phy_mem_clock)
-							`ifndef ALTERA_RESERVED_QIS
+						`ifndef ALTERA_RESERVED_QIS
 							,
 							.clk (outclock_wire),
 							.areset(1'b0),
@@ -171,7 +171,7 @@ module altgpio_one_bit(
 							.dffhi(),
 							.devpor(1'b1),
 							.devclrn(1'b1)
-							`endif
+						`endif
 						);
 					end
 				else
@@ -193,7 +193,7 @@ module altgpio_one_bit(
 							.muxsel(outclock_wire),
 							.ena(outclocken_wire),
 							.phymemclock(phy_mem_clock)
-							`ifndef ALTERA_RESERVED_QIS
+						`ifndef ALTERA_RESERVED_QIS
 							,
 							.areset(1'b0),
 							.clk(1'b0),
@@ -202,7 +202,7 @@ module altgpio_one_bit(
 							.dffhi(),
 							.devpor(1'b1),
 							.devclrn(1'b1)
-							`endif
+						`endif
 						);
 					end
 			end
@@ -226,7 +226,7 @@ module altgpio_one_bit(
 							.muxsel(outclock_wire),
 							.areset(aset),
 							.ena(outclocken_wire)
-							`ifndef ALTERA_RESERVED_QIS
+						`ifndef ALTERA_RESERVED_QIS
 							,
 							.clk(1'b0),
 							.phymemclock(1'b0),
@@ -235,7 +235,7 @@ module altgpio_one_bit(
 							.dffhi(),
 							.devpor(1'b1),
 							.devclrn(1'b1)
-							`endif
+						`endif
 						);
 					end
 				else if (SYNC_MODE != "none")
@@ -256,7 +256,7 @@ module altgpio_one_bit(
 							.muxsel(outclock_wire),
 							.sreset(sclr),
 							.ena(outclocken_wire)
-							`ifndef ALTERA_RESERVED_QIS
+						`ifndef ALTERA_RESERVED_QIS
 							,
 							.areset(1'b0),
 							.clk(1'b0),
@@ -265,7 +265,7 @@ module altgpio_one_bit(
 							.dffhi(),
 							.devpor(1'b1),
 							.devclrn(1'b1)
-							`endif
+						`endif
 						);
 					end
 				else
@@ -285,7 +285,7 @@ module altgpio_one_bit(
 							.clklo(outclock_wire),
 							.muxsel(outclock_wire),
 							.ena(outclocken_wire)
-							`ifndef ALTERA_RESERVED_QIS
+						`ifndef ALTERA_RESERVED_QIS
 							,
 							.areset(1'b0),
 							.clk(1'b0),
@@ -295,7 +295,7 @@ module altgpio_one_bit(
 							.dffhi(),
 							.devpor(1'b1),
 							.devclrn(1'b1)
-							`endif
+						`endif
 						);
 					end
 			end
@@ -355,14 +355,14 @@ module altgpio_one_bit(
 									.areset(aset),
 									.ena(oe_outclocken_wire),
 									.phymemclock(phy_mem_clock)
-									`ifndef ALTERA_RESERVED_QIS
+								`ifndef ALTERA_RESERVED_QIS
 									,
 									.sreset(1'b0),
 									.dfflo(),
 									.dffhi(),
 									.devpor(1'b1),
 									.devclrn(1'b1)
-									`endif
+								`endif
 								);
 						end
 					else if (SYNC_MODE != "none")
@@ -382,14 +382,14 @@ module altgpio_one_bit(
 									.sreset(sclr),
 									.ena(oe_outclocken_wire),
 									.phymemclock(phy_mem_clock)
-									`ifndef ALTERA_RESERVED_QIS
+								`ifndef ALTERA_RESERVED_QIS
 									,
 									.areset(1'b0),
 									.dfflo(),
 									.dffhi(),
 									.devpor(1'b1),
 									.devclrn(1'b1)
-									`endif
+								`endif
 								);
 						end
 					else
@@ -408,7 +408,7 @@ module altgpio_one_bit(
 									.clk(oe_inclk_wire),
 									.ena(oe_outclocken_wire),
 									.phymemclock(phy_mem_clock)
-									`ifndef ALTERA_RESERVED_QIS
+								`ifndef ALTERA_RESERVED_QIS
 									,
 									.areset(1'b0),
 									.sreset(1'b0),
@@ -416,7 +416,7 @@ module altgpio_one_bit(
 									.dffhi(),
 									.devpor(1'b1),
 									.devclrn(1'b1)
-									`endif
+								`endif
 								);
 						end
 				end
@@ -437,7 +437,7 @@ module altgpio_one_bit(
 									.clk(oe_inclk_wire),
 									.areset(aset),
 									.ena(oe_outclocken_wire)
-									`ifndef ALTERA_RESERVED_QIS
+								`ifndef ALTERA_RESERVED_QIS
 									,
 									.phymemclock(1'b0),
 									.sreset(1'b0),
@@ -445,7 +445,7 @@ module altgpio_one_bit(
 									.dffhi(),
 									.devpor(1'b1),
 									.devclrn(1'b1)
-									`endif
+								`endif
 								);
 						end
 					else if (SYNC_MODE != "none")
@@ -463,7 +463,7 @@ module altgpio_one_bit(
 									.clk(oe_inclk_wire),
 									.sreset(sclr),
 									.ena(oe_outclocken_wire)
-									`ifndef ALTERA_RESERVED_QIS
+								`ifndef ALTERA_RESERVED_QIS
 									,
 									.areset(1'b0),
 									.phymemclock(1'b0),
@@ -471,7 +471,7 @@ module altgpio_one_bit(
 									.dffhi(),
 									.devpor(1'b1),
 									.devclrn(1'b1)
-									`endif
+								`endif
 								);
 						end
 					else
@@ -488,7 +488,7 @@ module altgpio_one_bit(
 									.dataout(oe_out),
 									.clk(oe_inclk_wire),
 									.ena(oe_outclocken_wire)
-									`ifndef ALTERA_RESERVED_QIS
+								`ifndef ALTERA_RESERVED_QIS
 									,
 									.areset(1'b0),
 									.phymemclock(1'b0),
@@ -497,7 +497,7 @@ module altgpio_one_bit(
 									.dffhi(),
 									.devpor(1'b1),
 									.devclrn(1'b1)
-									`endif
+								`endif
 								);
 						end
 				end
@@ -563,13 +563,13 @@ module altgpio_one_bit(
 										.regoutlo(ddr_input[0]),
 										.clkout(fr_clock),
 										.areset(aset)
-										`ifndef ALTERA_RESERVED_QIS
+									`ifndef ALTERA_RESERVED_QIS
 										,
 										.sreset(1'b0),
 										.dfflo(),
 										.devpor(1'b1),
 										.devclrn(1'b1)
-										`endif
+									`endif
 									);
 								end
 							else if (SYNC_MODE != "none")
@@ -589,13 +589,13 @@ module altgpio_one_bit(
 										.regouthi(ddr_input[1]),
 										.regoutlo(ddr_input[0]),
 										.clkout(fr_clock)
-										`ifndef ALTERA_RESERVED_QIS
+									`ifndef ALTERA_RESERVED_QIS
 										,
 										.areset(1'b0),
 										.dfflo(),
 										.devpor(1'b1),
 										.devclrn(1'b1)
-										`endif
+									`endif
 									);
 								end
 							else
@@ -614,14 +614,14 @@ module altgpio_one_bit(
 										.regouthi(ddr_input[1]),
 										.regoutlo(ddr_input[0]),
 										.clkout(fr_clock)
-										`ifndef ALTERA_RESERVED_QIS
+									`ifndef ALTERA_RESERVED_QIS
 										,
 										.sreset(1'b0),
 										.areset(1'b0),
 										.dfflo(),
 										.devpor(1'b1),
 										.devclrn(1'b1)
-										`endif
+									`endif
 									);
 								end
 						end
@@ -643,14 +643,14 @@ module altgpio_one_bit(
 										.regoutlo(ddr_input[0]),
 										.clkout(fr_clock),
 										.areset(aset)
-										`ifndef ALTERA_RESERVED_QIS
+									`ifndef ALTERA_RESERVED_QIS
 										,
 										.sreset(1'b0),
 										.dfflo(),
 										.devpor(1'b1),
 										.devclrn(1'b1),
 										.halfrateresyncclk(1'b0)
-										`endif
+									`endif
 									);
 								end
 							else if (SYNC_MODE != "none")
@@ -669,14 +669,14 @@ module altgpio_one_bit(
 										.regouthi(ddr_input[1]),
 										.regoutlo(ddr_input[0]),
 										.clkout(fr_clock)
-										`ifndef ALTERA_RESERVED_QIS
+									`ifndef ALTERA_RESERVED_QIS
 										,
 										.areset(1'b0),
 										.dfflo(),
 										.devpor(1'b1),
 										.devclrn(1'b1),
 										.halfrateresyncclk(1'b0)
-										`endif
+									`endif
 									);
 								end
 							else
@@ -694,7 +694,7 @@ module altgpio_one_bit(
 										.regouthi(ddr_input[1]),
 										.regoutlo(ddr_input[0]),
 										.clkout(fr_clock)
-										`ifndef ALTERA_RESERVED_QIS
+									`ifndef ALTERA_RESERVED_QIS
 										,
 										.sreset(1'b0),
 										.areset(1'b0),
@@ -702,7 +702,7 @@ module altgpio_one_bit(
 										.devpor(1'b1),
 										.devclrn(1'b1),
 										.halfrateresyncclk(1'b0)
-										`endif
+									`endif
 									);
 								end
 						end
@@ -780,11 +780,11 @@ module altgpio_one_bit(
 					.oe(~oe_out),
 					.o(pad),
 					.obar()
-					`ifndef ALTERA_RESERVED_QIS
+				`ifndef ALTERA_RESERVED_QIS
 					,
 					.seriesterminationcontrol(16'b0),
 					.devoe(1'b1)
-					`endif
+				`endif
 				);
 
 				fiftyfivenm_io_obuf
@@ -796,11 +796,11 @@ module altgpio_one_bit(
 					.oe(~oe_out),
 					.o(pad_b),
 					.obar()
-					`ifndef ALTERA_RESERVED_QIS
+				`ifndef ALTERA_RESERVED_QIS
 					,
 					.seriesterminationcontrol(16'b0),
 					.devoe(1'b1)
-					`endif
+				`endif
 				);
 
 				fiftyfivenm_pseudo_diff_out pseudo_diff_a
@@ -822,11 +822,11 @@ module altgpio_one_bit(
 					.oe(~oe_out),
 					.o(pad),
 					.obar(pad_b)
-					`ifndef ALTERA_RESERVED_QIS
+				`ifndef ALTERA_RESERVED_QIS
 					,
 					.seriesterminationcontrol(16'b0),
 					.devoe(1'b1)
-					`endif
+				`endif
 				);
 			end
 			else
@@ -840,11 +840,11 @@ module altgpio_one_bit(
 					.oe(~oe_out),
 					.o(pad),
 					.obar()
-					`ifndef ALTERA_RESERVED_QIS
+				`ifndef ALTERA_RESERVED_QIS
 					,
 					.seriesterminationcontrol(16'b0),
 					.devoe(1'b1)
-					`endif
+				`endif
 				);
 			end
 		end
@@ -892,10 +892,10 @@ module altgpio_one_bit(
 						.i(pad),
 						.o(buf_in),
 						.nsleep(nsleep_in)
-						`ifndef ALTERA_RESERVED_QIS
+					`ifndef ALTERA_RESERVED_QIS
 						,
 						.ibar(1'b0)
-						`endif
+					`endif
 					);
 				end
 				else
@@ -906,10 +906,10 @@ module altgpio_one_bit(
 					) ibuf (
 						.i(pad),
 						.o(buf_in)
-						`ifndef ALTERA_RESERVED_QIS
+					`ifndef ALTERA_RESERVED_QIS
 						,
 						.ibar(1'b0)
-						`endif
+					`endif
 					);
 				end
 			end
@@ -1145,10 +1145,10 @@ module altera_gpio_lite(
 							.clk(inclock),
 							.phaseinvertctrl(invert_hr_clock),
 							.clkout(hr_clock)
-							`ifndef ALTERA_RESERVED_QIS
+						`ifndef ALTERA_RESERVED_QIS
 							,
 							.sreset(1'b0)
-							`endif
+						`endif
 						);
 				end
 			end
@@ -1165,10 +1165,10 @@ module altera_gpio_lite(
 						.clk(inclock),
 						.sreset(sclr_wire),
 						.clkout(hr_clock)
-						`ifndef ALTERA_RESERVED_QIS
+					`ifndef ALTERA_RESERVED_QIS
 						,
 						.phaseinvertctrl(1'b0)
-						`endif
+					`endif
 					);
 				end
 				else
@@ -1181,11 +1181,11 @@ module altera_gpio_lite(
 						) io_clkdiv (
 							.clk(inclock),
 							.clkout(hr_clock)
-							`ifndef ALTERA_RESERVED_QIS
+						`ifndef ALTERA_RESERVED_QIS
 							,
 							.sreset(1'b0),
 							.phaseinvertctrl(1'b0)
-							`endif
+						`endif
 						);
 				end
 			end

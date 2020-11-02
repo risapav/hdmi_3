@@ -271,7 +271,15 @@ module hdmi
 		// TMDS code production.
 		for (i = 0; i < NUM_CHANNELS; i++)
 		begin: tmds_gen
-					tmds_channel #(.CN(i)) tmds_channel (.clk_pixel(clk_pixel), .video_data(video_data[i*8+7:i*8]), .data_island_data(data_island_data[i*4+3:i*4]), .control_data(control_data[i*2+1:i*2]), .mode(mode), .tmds(tmds[i]));
+			tmds_channel #(.CN(i)) 
+			tmds_channel (
+				.clk_pixel(clk_pixel), 
+				.video_data(video_data[i*8+7:i*8]), 
+				.data_island_data(data_island_data[i*4+3:i*4]), 
+				.control_data(control_data[i*2+1:i*2]), 
+				.mode(mode), 
+				.tmds(tmds[i])
+			);
 		end
 
 		// Shift registers are loaded with a set of values from tmds_channels every ten clk_pixel_x10. They are shifted out by the time the next set is loaded.
@@ -281,10 +289,10 @@ module hdmi
 
 		logic tmds_control = 1'd0;
 		always_ff @(posedge clk_pixel)
-					tmds_control <= !tmds_control;
+			tmds_control <= !tmds_control;
 		logic [3:0] tmds_control_synchronizer_chain = 2'd0;
 		always_ff @(posedge clk_pixel_x10)
-					tmds_control_synchronizer_chain <= {tmds_control, tmds_control_synchronizer_chain[3:1]};
+			tmds_control_synchronizer_chain <= {tmds_control, tmds_control_synchronizer_chain[3:1]};
 
 		logic [9:0] tmds_mux [NUM_CHANNELS-1:0];
 		always_comb
@@ -343,7 +351,15 @@ module hdmi
 				`else
 					altDDIO_out DDRIO (
 						.dataout({tmds_current, tmds_current_clk}), 
-						.outclock(clk_pixel_x10), .datain_h({tmds_shift[2][0], tmds_shift[1][0], tmds_shift[0][0], tmds_shift_clk_pixel[0]}), .datain_l({tmds_shift[2][1], tmds_shift[1][1], tmds_shift[0][1], tmds_shift_clk_pixel[1]}), .aclr(1'b0), .aset(1'b0), .outclocken(1'b1), .sclr(1'b0), .sset(1'b0));
+						.outclock(clk_pixel_x10), 
+						.datain_h({tmds_shift[2][0], tmds_shift[1][0], tmds_shift[0][0], tmds_shift_clk_pixel[0]}), 
+						.datain_l({tmds_shift[2][1], tmds_shift[1][1], tmds_shift[0][1], tmds_shift_clk_pixel[1]}), 
+						.aclr(1'b0), 
+						.aset(1'b0), 
+						.outclocken(1'b1), 
+						.sclr(1'b0), 
+						.sset(1'b0)
+					);
 					defparam DDRIO.inverted_input_clocks = "OFF", DDRIO.lpm_hint = "UNUSED", DDRIO.lpm_type = "altDDIO_out", DDRIO.power_up_high = "OFF", DDRIO.width = NUM_CHANNELS + 1;
 				`endif
 			end
@@ -353,27 +369,35 @@ module hdmi
 				assign tmds_current_clk = tmds_shift_clk_pixel[0];
 			end
 
-	`ifndef VERILATOR
-		// Differential signal output
-		`ifdef SYNTHESIS // TODO: Is this really Vivado? https://forums.xilinx.com/t5/Simulation-and-Verification/Predefined-constant-for-simulation/td-p/986901
-			`ifndef ALTERA_RESERVED_QIS
-				for (i = 0; i < NUM_CHANNELS; i++)
-					begin: obufds_gen
-						OBUFDS obufds (.I(tmds_current[i]), .O(tmds_p[i]), .OB(tmds_n[i]));
-					end
-				OBUFDS OBUFDS_clock(.I(tmds_current_clk), .O(tmds_clock_p), .OB(tmds_clock_n));
-			`endif
-		`else
-			// If Altera synthesis, a true differential buffer is built with altera_gpio_lite from the Intel IP Catalog.
-			// If simulation, a mocked signal inversion is used.
-			OBUFDS obufds(
-				.din({tmds_current, tmds_current_clk}), 
-				.pad_out({tmds_p, tmds_clock_p}), 
-				.pad_out_b({tmds_n, tmds_clock_n})
+`ifndef VERILATOR
+	// Differential signal output
+	`ifdef SYNTHESIS // TODO: Is this really Vivado? https://forums.xilinx.com/t5/Simulation-and-Verification/Predefined-constant-for-simulation/td-p/986901
+		`ifndef ALTERA_RESERVED_QIS
+			for (i = 0; i < NUM_CHANNELS; i++)
+				begin: obufds_gen
+					OBUFDS obufds (
+						.I(tmds_current[i]), 
+						.O(tmds_p[i]), 
+						.OB(tmds_n[i])
+					);
+				end
+			OBUFDS OBUFDS_clock(
+				.I(tmds_current_clk), 
+				.O(tmds_clock_p), 
+				.OB(tmds_clock_n)
 			);
 		`endif
+	`else
+		// If Altera synthesis, a true differential buffer is built with altera_gpio_lite from the Intel IP Catalog.
+		// If simulation, a mocked signal inversion is used.
+		OBUFDS obufds(
+			.din({tmds_current, tmds_current_clk}), 
+			.pad_out({tmds_p, tmds_clock_p}), 
+			.pad_out_b({tmds_n, tmds_clock_n})
+		);
 	`endif
+`endif
 
-endgenerate
+	endgenerate
 
 endmodule

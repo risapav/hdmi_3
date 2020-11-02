@@ -63,18 +63,18 @@ module packet_assembler (
 	always_ff @(posedge clk_pixel)
 	begin
 		if (data_island_period)
-		begin
-			if (counter < 5'd28) // Compute ECC only on subpacket data, not on itself
 			begin
-				parity[3:0] <= parity_next_next;
-				if (counter < 5'd24) // Header only has 24 bits, whereas subpackets have 56 and 56 / 2 = 28.
-					parity[4] <= parity_next[4];
-			end
-			else if (counter == 5'd31)
-				parity <= '{8'd0, 8'd0, 8'd0, 8'd0, 8'd0}; // Reset ECC for next packet
-		end
-		else
-			parity <= '{8'd0, 8'd0, 8'd0, 8'd0, 8'd0};
+				if (counter < 5'd28) // Compute ECC only on subpacket data, not on itself
+					begin
+						parity[3:0] <= parity_next_next;
+						if (counter < 5'd24) // Header only has 24 bits, whereas subpackets have 56 and 56 / 2 = 28.
+							parity[4] <= parity_next[4];
+					end
+				else if (counter == 5'd31)
+					parity <= '{8'd0, 8'd0, 8'd0, 8'd0, 8'd0}; // Reset ECC for next packet
+				end
+			else
+		parity <= '{8'd0, 8'd0, 8'd0, 8'd0, 8'd0};
 	end
 
 endmodule
