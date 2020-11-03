@@ -46,7 +46,7 @@ module top
 	lvds_tx_n,
 	sys_clk,
 	uart_rx,
-	uart_tx,
+	uart_tx
 // {ALTERA_ARGS_END} DO NOT REMOVE THIS LINE!
 
 );
@@ -98,8 +98,7 @@ pll	clock(
 	.c0(pixel_clk),
 	.c1(pixel_clk10),
 	.c2(audio_clk),
-	.c3(atari_clk),
-		
+	.c3(atari_clk)
 	);
 //end of frequency generator
 
@@ -116,13 +115,11 @@ Test test(
 
 //hdmi app
 App app(
-	.clk_pixel(pixel_clk), 
-	.clk_pixel_x10(pixel_clk10), 
+	.clk_pix(pixel_clk), 
+	.clk_pix10(pixel_clk10), 
 	.clk_audio(audio_clk),
-	.tmds_p({lvds_tx[0],lvds_tx[1],lvds_tx[2]}), 
-	.tmds_clock_p(lvds_tx[3]), 
-	.tmds_n({lvds_tx_n[0],lvds_tx_n[1],lvds_tx_n[2]}), 
-	.tmds_clock_n(lvds_tx_n[3])
+	.tmds_p(lvds_tx), 
+	.tmds_n(lvds_tx_n)
 	);
 //end of hdmi app
 
