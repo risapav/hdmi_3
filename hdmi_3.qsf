@@ -155,9 +155,11 @@ set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to lvds_tx
 set_location_assignment PIN_J13 -to led[0]
 set_location_assignment PIN_G16 -to led[1]
 set_location_assignment PIN_B16 -to led[2]
+set_location_assignment PIN_F8 -to led[3]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[0]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[1]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[3]
 #i2c
 set_location_assignment PIN_C9 -to SDA
 set_location_assignment PIN_D9 -to SDC
