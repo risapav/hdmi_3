@@ -94,11 +94,11 @@ module App (
 	display_timings timings_640x480 (
 		.clk_pix,	//pixel clock
 		.rst(rst_in),	//reset
-		.sx,	// X position in visible frame
-		.sy,	// Y position in visible frame
+		.sx,	// X position in full frame (visible + blanking)
+		.sy,	// Y position in full frame (visible + blanking)
 		.hsync(hsync),
 		.vsync(vsync),
-		.de
+		.de	// signaling, coordinates are inside visible area
 		);
 
 	// size of screen (including blanking)
