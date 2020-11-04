@@ -100,43 +100,6 @@ module App (
 		.vsync(vsync),
 		.de	// signaling, coordinates are inside visible area
 		);
-
-	// size of screen (including blanking)
-	localparam H_RES = 800;
-	localparam V_RES = 525;
-
-	// square 'Q' - origin at top-left
-	localparam Q_SIZE = 32; // square size in pixels
-	localparam Q_SPEED = 4; // pixels moved per frame
-	logic [CORDW-1:0] qx, qy;     // square position
-
-	logic animate;  // high for one clock tick at start of blanking
-	always_comb 
-		animate = (sy == 480 && sx == 0);
-
-	// update square position once per frame
-	always_ff @(posedge clk_pix) 
-		begin
-			if (animate) 
-				begin
-			if (qx >= H_RES - Q_SIZE) 
-				begin
-					qx <= 0;
-					qy <= (qy >= V_RES - Q_SIZE) ? 0 : qy + Q_SIZE;
-				end 
-			else 
-				begin
-					qx <= qx + Q_SPEED;
-				end
-			end
-		end
-
-	// is square at current screen position?
-	logic q_draw;
-	always_comb 
-		begin
-			q_draw = (sx >= qx) && (sx < qx + Q_SIZE) && (sy >= qy) && (sy < qy + Q_SIZE);
-		end
 	//---------------------
 	//generate picture
 	//---------------------
