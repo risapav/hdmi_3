@@ -1,6 +1,7 @@
 //App app(.pixel_clk(clk_25), .pixel_clk10(clk_250), .clk(clk_32));
 
 module App (
+	input wire rst_in,
 	input wire logic clk_pix, 
 	input wire logic clk_pix10, 
 	input wire logic clk_audio,
@@ -68,14 +69,10 @@ module App (
 //		.screen_width(screen_width),
 //		.screen_height(screen_height)
 //	);
-	// button reset 
-	logic rst_in;
-	always_comb
-		begin
-			rst_in = 0;
-		end
-		
-	// channel output
+	
+	//---------------------
+	// channels output
+	//---------------------
 	logic [3:0] tmdsint;
 	always_ff @ (posedge clk_pix)
 		tmdsint[3] <= clk_pix;
@@ -86,18 +83,19 @@ module App (
 		.pad_out(tmds_p), 
 		.pad_out_b(tmds_n)
 	);
-		
+	//---------------------	
 	// display timings
+	//---------------------
 	localparam CORDW = 10;  // screen coordinate width in bits
-	logic [CORDW-1:0] sx, sy;
+	logic [CORDW-1:0] sx, sy;//coordinates in visible frame
 	logic de;
-	logic hsync, vsync;
+	logic hsync, vsync;	//picture synchronzation
 
 	display_timings timings_640x480 (
-		.clk_pix,
-		.rst(rst_in),  // wait for clock lock
-		.sx,
-		.sy,
+		.clk_pix,	//pixel clock
+		.rst(rst_in),	//reset
+		.sx,	// X position in visible frame
+		.sy,	// Y position in visible frame
 		.hsync(hsync),
 		.vsync(vsync),
 		.de
@@ -139,8 +137,9 @@ module App (
 		begin
 			q_draw = (sx >= qx) && (sx < qx + Q_SIZE) && (sy >= qy) && (sy < qy + Q_SIZE);
 		end
-		
+	//---------------------
 	//generate picture
+	//---------------------
 	wire [7:0] red = {sx[5:0] & {6{sy[4:3]==~sx[4:3]}}, 2'b00};
 	wire [7:0] green = sx[7:0] & {8{sy[6]}};
 	wire [7:0] blue = sy[7:0];
