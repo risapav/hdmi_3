@@ -183,6 +183,8 @@ set_global_assignment -name TOP_LEVEL_ENTITY top
 #set_global_assignment -name QIP_FILE library/hdmi/hdmi.qip
 
 
+
+set_global_assignment -name VERILOG_FILE library/debouncer/debouncer.v
 set_global_assignment -name VERILOG_FILE library/divider/divider.v
 set_global_assignment -name SYSTEMVERILOG_FILE library/dvi/altera_gpio_lite.sv
 set_global_assignment -name VERILOG_FILE library/dvi/OBUFDS.v

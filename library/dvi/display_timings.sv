@@ -65,9 +65,9 @@ module display_timings (
 	parameter Y_RES = 480;	//Active Lines
 	
 	// horizontal timings
-	parameter H_FRONT_PORCH	16;	// Front Porch
-	parameter H_SYNC_WIDTH 96;	// Sync Width
-	parameter H_BACK_PORCH 48;	// Back Porch
+	parameter H_FRONT_PORCH	= 16;	// Front Porch
+	parameter H_SYNC_WIDTH = 96;	// Sync Width
+	parameter H_BACK_PORCH = 48;	// Back Porch
 	
 	parameter HA_END = X_RES - 1;	// end of active pixels
 	parameter HS_STA = HA_END + H_FRONT_PORCH;	// sync starts after front porch
@@ -75,9 +75,9 @@ module display_timings (
 	parameter LINE   = H_RES - 1;	// last pixel on line (after back porch)
 
 	// vertical timings
-	parameter V_FRONT_PORCH	10;	// Front Porch
-	parameter V_SYNC_WIDTH 2;	// Sync Width
-	parameter V_BACK_PORCH 33;	// Back Porch
+	parameter V_FRONT_PORCH = 10;	// Front Porch
+	parameter V_SYNC_WIDTH = 2;	// Sync Width
+	parameter V_BACK_PORCH = 33;	// Back Porch
 
 	parameter VA_END = Y_RES - 1;	// end of active pixels
 	parameter VS_STA = VA_END + V_FRONT_PORCH;	// sync starts after front porch

@@ -126,14 +126,14 @@ output		uart_tx;
 	//end of test clock
 
 	//hdmi app
-	App app(
-		.rst_in(reset),
-		.clk_pix(pixel_clk), 
-		.clk_pix10(pixel_clk10), 
-		.clk_audio(audio_clk),
-		.tmds_p(lvds_tx), 
-		.tmds_n(lvds_tx_n)
-		);
+//	App app(
+//		.rst_in(reset),
+//		.clk_pix(pixel_clk), 
+//		.clk_pix10(pixel_clk10), 
+//		.clk_audio(audio_clk),
+//		.tmds_p(lvds_tx), 
+//		.tmds_n(lvds_tx_n)
+//		);
 	//end of hdmi app
 
 
