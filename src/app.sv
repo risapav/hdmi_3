@@ -26,49 +26,18 @@ module App (
 //			cx == frame_width - 1'd1 || cy == frame_height - 1'd1 ? ~8'd0 : 8'd0
 //			};
 
-	// 640x480 @ 59.94Hz
-//	hdmi #(.VIDEO_ID_CODE(1), .VIDEO_REFRESH_RATE(59.94), .AUDIO_RATE(48000), .AUDIO_BIT_WIDTH(16)) 
-//	hdmi(
-//	  .clk_pixel_x10(clk_pixel_x10),
-//	  .clk_pixel(clk_pixel),
-//	  .clk_audio(clk_audio),
-//	  .rgb(rgb),
-//	  .audio_sample_word(audio_sample_word),
-//	  .tmds_p(tmds_p),
-//	  .tmds_clock_p(tmds_clock_p),
-//	  .tmds_n(tmds_n),
-//	  .tmds_clock_n(tmds_clock_n),
-//	  .cx(cx),
-//	  .cy(cy),
-//	  .screen_start_x(screen_start_x),
-//	  .screen_start_y(screen_start_y),
-//	  .frame_width(frame_width),
-//	  .frame_height(frame_height),
-//	  .screen_width(screen_width),
-//	  .screen_height(screen_height)
-//	);
+	//---------------------
+	// Operating Modes 
+	// See Section 5.2
+	//---------------------
+	logic video_data_period = 1;
+	always_ff @(posedge clk_pixel)
+		video_data_period <= cx >= screen_start_x && cy >= screen_start_y;
 	
-//	// 640x480 @ 60Hz
-//	hdmi #(.VIDEO_ID_CODE(1), .VIDEO_REFRESH_RATE(60.00), .AUDIO_RATE(44100), .AUDIO_BIT_WIDTH(16)) 
-//	hdmi(
-//		.clk_pixel_x10(clk_pixel_x10),
-//		.clk_pixel(clk_pixel),
-//		.clk_audio(clk_audio),
-//		.rgb(rgb),
-//		.audio_sample_word(audio_sample_word),
-//		.tmds_p(tmds_p),
-//		.tmds_clock_p(tmds_clock_p),
-//		.tmds_n(tmds_n),
-//		.tmds_clock_n(tmds_clock_n),
-//		.cx(cx),
-//		.cy(cy),
-//		.screen_start_x(screen_start_x),
-//		.screen_start_y(screen_start_y),
-//		.frame_width(frame_width),
-//		.frame_height(frame_height),
-//		.screen_width(screen_width),
-//		.screen_height(screen_height)
-//	);
+	logic [2:0] mode = 3'd1;
+	logic [23:0] video_data = 24'd0;
+	logic [5:0] control_data = 6'd0;
+	logic [11:0] data_island_data = 12'd0;
 	
 	//---------------------
 	// channels output

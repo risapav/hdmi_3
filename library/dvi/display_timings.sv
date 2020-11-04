@@ -47,43 +47,49 @@
 `default_nettype none
 `timescale 1ns / 1ps
 
-module display_timings (
+module display_timings 
+#(
+	// screen coordinate width in bits
+	parameter int CORDW = 10,
+	
+	// size of screen (including blanking)
+	parameter H_RES = 800,
+	parameter V_RES = 525,
+	
+	// size of visible screen
+	parameter X_RES = 640,	//Active Pixels 
+	parameter Y_RES = 480,	//Active Lines
+	
+	// horizontal timings
+	parameter H_FRONT_PORCH	= 16,	// Front Porch
+	parameter H_SYNC_WIDTH = 96,	// Sync Width
+	parameter H_BACK_PORCH = 48,	// Back Porch
+	
+	// vertical timings
+	parameter V_FRONT_PORCH = 10,	// Front Porch
+	parameter V_SYNC_WIDTH = 2,	// Sync Width
+	parameter V_BACK_PORCH = 33	// Back Porch
+	)
+	(
 	input  wire logic clk_pix,   // pixel clock
 	input  wire logic rst,       // reset
-	output      logic [9:0] sx,  // horizontal screen position
-	output      logic [9:0] sy,  // vertical screen position
+	output      logic [CORDW:0] sx,  // horizontal screen position
+	output      logic [CORDW:0] sy,  // vertical screen position
 	output      logic hsync,     // horizontal sync
 	output      logic vsync,     // vertical sync
 	output      logic de         // data enable (low in blanking interval)
 	);
 	
-	// size of screen (including blanking)
-	parameter H_RES = 800;
-	parameter V_RES = 525;
-	// size of visible screen
-	parameter X_RES = 640;	//Active Pixels 
-	parameter Y_RES = 480;	//Active Lines
-	
-	// horizontal timings
-	parameter H_FRONT_PORCH	= 16;	// Front Porch
-	parameter H_SYNC_WIDTH = 96;	// Sync Width
-	parameter H_BACK_PORCH = 48;	// Back Porch
-	
-	parameter HA_END = X_RES - 1;	// end of active pixels
-	parameter HS_STA = HA_END + H_FRONT_PORCH;	// sync starts after front porch
-	parameter HS_END = HS_STA + H_SYNC_WIDTH;	// sync ends
-	parameter LINE   = H_RES - 1;	// last pixel on line (after back porch)
+	localparam HA_END = X_RES - 1;	// end of active pixels
+	localparam HS_STA = HA_END + H_FRONT_PORCH;	// sync starts after front porch
+	localparam HS_END = HS_STA + H_SYNC_WIDTH;	// sync ends
+	localparam LINE   = H_RES - 1;	// last pixel on line (after back porch)
 
-	// vertical timings
-	parameter V_FRONT_PORCH = 10;	// Front Porch
-	parameter V_SYNC_WIDTH = 2;	// Sync Width
-	parameter V_BACK_PORCH = 33;	// Back Porch
-
-	parameter VA_END = Y_RES - 1;	// end of active pixels
-	parameter VS_STA = VA_END + V_FRONT_PORCH;	// sync starts after front porch
+	localparam VA_END = Y_RES - 1;	// end of active pixels
+	localparam VS_STA = VA_END + V_FRONT_PORCH;	// sync starts after front porch
 	
-	parameter VS_END = VS_STA + V_SYNC_WIDTH;	// sync ends
-	parameter SCREEN = V_RES - 1;	// last line on screen (after back porch)
+	localparam VS_END = VS_STA + V_SYNC_WIDTH;	// sync ends
+	localparam SCREEN = V_RES - 1;	// last line on screen (after back porch)
 
 	always_comb 
 		begin
