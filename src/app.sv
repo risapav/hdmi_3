@@ -70,10 +70,45 @@ module App (
 //		.de	// signaling, coordinates are inside visible area
 //		);
 	//---------------------
+	// hdmi interface
+	//---------------------
+	hdmi hdmi_int
+	(
+		input logic clk_pixel_x10,
+		input logic clk_pixel,
+		input logic clk_audio,
+		input logic [23:0] rgb, // vstup pre video data
+		input logic [AUDIO_BIT_WIDTH-1:0] audio_sample_word [1:0],
+
+		// These outputs go to your HDMI port
+		output logic [2:0] tmds_p,
+		output logic tmds_clock_p,
+		output logic [2:0] tmds_n,
+		output logic tmds_clock_n,
+
+		// All outputs below this line stay inside the FPGA
+		// They are used (by you) to pick the color each pixel should have
+		// i.e. always_ff @(posedge pixel_clk) rgb <= {8'd0, 8'(cx), 8'(cy)};
+		output logic [BIT_WIDTH-1:0] cx = BIT_WIDTH'(0),
+		output logic [BIT_HEIGHT-1:0] cy = BIT_HEIGHT'(0),
+
+		// the screen is at the bottom right corner of the frame, namely:
+		// frame_width = screen_start_x + screen_width
+		// frame_height = screen_start_y + screen_height
+		output logic [BIT_WIDTH-1:0] frame_width,
+		output logic [BIT_HEIGHT-1:0] frame_height,
+		output logic [BIT_WIDTH-1:0] screen_width,
+		output logic [BIT_HEIGHT-1:0] screen_height,
+		output logic [BIT_WIDTH-1:0] screen_start_x,
+		output logic [BIT_HEIGHT-1:0] screen_start_y
+	);	
+	//---------------------
 	//generate picture
 	//---------------------
-	wire [7:0] red = {sx[5:0] & {6{sy[4:3]==~sx[4:3]}}, 2'b00};
-	wire [7:0] green = sx[7:0] & {8{sy[6]}};
-	wire [7:0] blue = sy[7:0];
+	logic [23:0] rgb = 24'd0;
+	
+//	wire [7:0] red = {sx[5:0] & {6{sy[4:3]==~sx[4:3]}}, 2'b00};
+//	wire [7:0] green = sx[7:0] & {8{sy[6]}};
+//	wire [7:0] blue = sy[7:0];
 
 endmodule
