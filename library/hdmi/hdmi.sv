@@ -16,10 +16,10 @@ module hdmi
 	// A true HDMI signal sends auxiliary data (i.e. audio, preambles) which prevents it from being parsed by DVI signal sinks.
 	// HDMI signal sinks are fortunately backwards-compatible with DVI signals.
 	// Enable this flag if the output should be a DVI signal. You might want to do this to reduce resource usage or if you're only outputting video.
-	parameter bit DVI_OUTPUT = 1'b1,
+	parameter bit DVI_OUTPUT = 1'b0,
 
 	// When enabled, DDRIO (Double Data Rate I/O) is used and clk_pixel_x10 only needs to be five times as fast as clk_pixel.
-//	parameter bit DDRIO = 1'b0,
+	parameter bit DDRIO = 1'b0,
 
 	// **All parameters below matter ONLY IF you plan on sending auxiliary data (DVI_OUTPUT == 1'b0)**
 
