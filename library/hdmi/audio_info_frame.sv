@@ -42,12 +42,12 @@ module audio_info_frame
 	genvar i;
 	generate
 		for (i = 6; i < 28; i++)
-		begin: pb_reserved
-			assign packet_bytes[i] = 8'd0;
-		end
+			begin: pb_reserved
+				assign packet_bytes[i] = 8'd0;
+			end
 		for (i = 0; i < 4; i++)
-		begin: pb_to_sub
-			assign sub[i] = {packet_bytes[6 + i*7], packet_bytes[5 + i*7], packet_bytes[4 + i*7], packet_bytes[3 + i*7], packet_bytes[2 + i*7], packet_bytes[1 + i*7], packet_bytes[0 + i*7]};
-		end
+			begin: pb_to_sub
+				assign sub[i] = {packet_bytes[6 + i*7], packet_bytes[5 + i*7], packet_bytes[4 + i*7], packet_bytes[3 + i*7], packet_bytes[2 + i*7], packet_bytes[1 + i*7], packet_bytes[0 + i*7]};
+			end
 	endgenerate
 endmodule

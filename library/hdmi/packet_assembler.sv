@@ -28,7 +28,17 @@ module packet_assembler (
 	assign bch[2] = {parity[2], sub[2]};
 	assign bch[3] = {parity[3], sub[3]};
 	wire [31:0] bch4 = {parity[4], header};
-	assign packet_data = {bch[3][counter_t2_p1], bch[2][counter_t2_p1], bch[1][counter_t2_p1], bch[0][counter_t2_p1], bch[3][counter_t2], bch[2][counter_t2], bch[1][counter_t2], bch[0][counter_t2], bch4[counter]};
+	assign packet_data = {
+		bch[3][counter_t2_p1], 
+		bch[2][counter_t2_p1], 
+		bch[1][counter_t2_p1], 
+		bch[0][counter_t2_p1], 
+		bch[3][counter_t2], 
+		bch[2][counter_t2], 
+		bch[1][counter_t2], 
+		bch[0][counter_t2], 
+		bch4[counter]
+	};
 
 	// See Figure 5-5 Error Correction Code generator. Generalization of a CRC with binary BCH.
 	// See https://web.archive.org/web/20190520020602/http://hamsterworks.co.nz/mediawiki/index.php/Minimal_HDMI#Computing_the_ECC for an explanation of the implementation.
@@ -53,10 +63,10 @@ module packet_assembler (
 			if (i == 4)
 				assign parity_next[i] = next_ecc(parity[i], header[counter]);
 			else
-			begin
-				assign parity_next[i] = next_ecc(parity[i], sub[i][counter_t2]);
-				assign parity_next_next[i] = next_ecc(parity_next[i], sub[i][counter_t2_p1]);
-			end
+				begin
+					assign parity_next[i] = next_ecc(parity[i], sub[i][counter_t2]);
+					assign parity_next_next[i] = next_ecc(parity_next[i], sub[i][counter_t2_p1]);
+				end
 		end
 	endgenerate
 

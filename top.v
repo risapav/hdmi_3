@@ -16,14 +16,15 @@ module top
 (
 // {ALTERA_ARGS_BEGIN} DO NOT REMOVE THIS LINE!
 
+	sys_clk,
 	P3_2,
 	P3_3,
 	P3_4,
 	P4_2,
 	P5_2,
 	P5_3,
-	P6_2,
 	P6_3,
+	P6_2,
 	P8_3,
 	P8_4,
 	P8_5,
@@ -40,26 +41,26 @@ module top
 	P8_16,
 	SDA,
 	SDC,
+	uart_tx,
+	uart_rx,
 	button,
-	led,
 	tmds_p,
 	tmds_n,
-	sys_clk,
-	uart_rx,
-	uart_tx
+	led
 // {ALTERA_ARGS_END} DO NOT REMOVE THIS LINE!
 
 );
 
 // {ALTERA_IO_BEGIN} DO NOT REMOVE THIS LINE!
+input			sys_clk;
 input			P3_2;
 input			P3_3;
 input			P3_4;
 input			P4_2;
 input			P5_2;
 input			P5_3;
-input			P6_2;
 input			P6_3;
+input			P6_2;
 input			P8_3;
 input			P8_4;
 input			P8_5;
@@ -75,14 +76,13 @@ input			P8_14;
 input			P8_15;
 input			P8_16;
 input			SDA;
-input			SDC;
-input		[0:2]	button;
-output	[0:3]	led;
+output			SDC;
+output			uart_tx;
+input			uart_rx;
+input	[0:2]	button;
 output	[0:3]	tmds_p;
 output	[0:3]	tmds_n;
-input			sys_clk;
-input			uart_rx;
-output		uart_tx;
+output	[0:3]	led;
 
 // {ALTERA_IO_END} DO NOT REMOVE THIS LINE!
 // {ALTERA_MODULE_BEGIN} DO NOT REMOVE THIS LINE!
@@ -128,14 +128,12 @@ output		uart_tx;
 	//hdmi app
 	App app(
 		.rst_in(reset),
-		.clk_pix, 
-		.clk_pix10, 
-		.clk_audio,
-		.tmds_p, 
-		.tmds_n
+		.clk_pix(clk_pix), 
+		.clk_pix10(clk_pix10), 
+		.clk_audio(clk_audio),
+		.tmds_p(tmds_p), 
+		.tmds_n(tmds_n)
 		);
-	//end of hdmi app
-
-
 // {ALTERA_MODULE_END} DO NOT REMOVE THIS LINE!
 endmodule
+

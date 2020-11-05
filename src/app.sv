@@ -10,65 +10,6 @@ module App (
 	output logic [0:3] tmds_n
 	);
 
-//	//generate sound
-//	logic [15:0] audio_sample_word [1:0] = '{16'sd0, 16'sd0};
-//	always @(posedge clk_audio)
-//		audio_sample_word <= '{audio_sample_word[0] + 16'sd1, audio_sample_word[1] - 16'sd1};
-//		
-//	//generate picture
-//	logic [23:0] rgb = 24'd0;
-//	logic [9:0] cx, cy, screen_start_x, screen_start_y, frame_width, frame_height, screen_width, screen_height;
-//	// Border test (left = red, top = green, right = blue, bottom = blue, fill = black)
-//	always @(posedge clk_pixel)
-//		rgb <= {
-//			cx == screen_start_x ? ~8'd0 : 8'd0, 
-//			cy == screen_start_y ? ~8'd0 : 8'd0, 
-//			cx == frame_width - 1'd1 || cy == frame_height - 1'd1 ? ~8'd0 : 8'd0
-//			};
-
-	//---------------------
-	// Operating Modes 
-	// See Section 5.2
-	//---------------------
-//	logic video_data_period = 1;
-//	always_ff @(posedge clk_pixel)
-//		video_data_period <= cx >= screen_start_x && cy >= screen_start_y;
-	
-//	logic [2:0] mode = 3'd1;
-//	logic [23:0] video_data = 24'd0;
-//	logic [5:0] control_data = 6'd0;
-//	logic [11:0] data_island_data = 12'd0;
-	
-	//---------------------
-	// channels output
-	//---------------------
-//	logic [3:0] tmdsint;
-//	always_ff @ (posedge clk_pix)
-//		tmdsint[3] <= clk_pix;
-	// If Altera synthesis, a true differential buffer is built with altera_gpio_lite from the Intel IP Catalog.
-	// If simulation, a mocked signal inversion is used.
-//	OBUFDS obufds(
-//		.din(tmdsint), 
-//		.pad_out(tmds_p), 
-//		.pad_out_b(tmds_n)
-//	);
-	//---------------------	
-	// display timings
-	//---------------------
-//	localparam CORDW = 10;  // screen coordinate width in bits
-///	logic [CORDW-1:0] sx, sy;//coordinates in visible frame
-//	logic de;
-//	logic hsync, vsync;	//picture synchronzation
-//
-//	display_timings timings_640x480 (
-//		.clk_pix,	//pixel clock
-//		.rst(rst_in),	//reset
-//		.sx,	// X position in full frame (visible + blanking)
-//		.sy,	// Y position in full frame (visible + blanking)
-//		.hsync(hsync),
-//		.vsync(vsync),
-//		.de	// signaling, coordinates are inside visible area
-//		);
 
 	// picture 
 	logic [9:0] cx, cy, screen_start_x, screen_start_y, frame_width, frame_height, screen_width, screen_height;
