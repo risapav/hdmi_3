@@ -42,8 +42,8 @@ module top
 	SDC,
 	button,
 	led,
-	lvds_tx,
-	lvds_tx_n,
+	tmds_p,
+	tmds_n,
 	sys_clk,
 	uart_rx,
 	uart_tx
@@ -78,8 +78,8 @@ input			SDA;
 input			SDC;
 input		[0:2]	button;
 output	[0:3]	led;
-output	[0:3]	lvds_tx;
-output	[0:3]	lvds_tx_n;
+output	[0:3]	tmds_p;
+output	[0:3]	tmds_n;
 input			sys_clk;
 input			uart_rx;
 output		uart_tx;
@@ -100,25 +100,25 @@ output		uart_tx;
 	//end of reset
 	
 	//frequency generator
-	wire	pixel_clk;
-	wire	pixel_clk10;
-	wire	audio_clk;
-	wire	atari_clk;
+	wire	clk_pix;
+	wire	clk_pix10;
+	wire	clk_audio;
+	wire	clk_atari;
 
 	pll	clock(
 		.inclk0(sys_clk),
-		.c0(pixel_clk),
-		.c1(pixel_clk10),
-		.c2(audio_clk),
-		.c3(atari_clk)
+		.c0(clk_pix),
+		.c1(clk_pix10),
+		.c2(clk_audio),
+		.c3(clk_atari)
 		);
 	//end of frequency generator
 
 	//test clock
 	Test test(
-		.CLK1(pixel_clk), 
-		.CLK2(pixel_clk10), 
-		.CLK3(audio_clk), 
+		.CLK1(clk_pix), 
+		.CLK2(clk_pix10), 
+		.CLK3(clk_audio), 
 		.LED1(led[0]),
 		.LED2(led[1]),
 		.LED3(led[2])
@@ -128,11 +128,11 @@ output		uart_tx;
 	//hdmi app
 	App app(
 		.rst_in(reset),
-		.clk_pix(pixel_clk), 
-		.clk_pix10(pixel_clk10), 
-		.clk_audio(audio_clk),
-		.tmds_p(lvds_tx), 
-		.tmds_n(lvds_tx_n)
+		.clk_pix, 
+		.clk_pix10, 
+		.clk_audio,
+		.tmds_p, 
+		.tmds_n
 		);
 	//end of hdmi app
 

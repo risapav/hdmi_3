@@ -96,8 +96,8 @@ module App (
 		.clk_pixel_x10(clk_pix10),
 		.clk_pixel(clk_pix),
 		.clk_audio(clk_audio),
-		.rgb(rgb), // vstup pre video data
-		.audio_sample_word(audio_sample_word),
+		.rgb, // vstup pre video data
+		.audio_sample_word,
 
 		// These outputs go to your HDMI port
 		.tmds_p({tmds_p[2],tmds_p[1],tmds_p[0]}),
@@ -108,18 +108,18 @@ module App (
 		// All outputs below this line stay inside the FPGA
 		// They are used (by you) to pick the color each pixel should have
 		// i.e. always_ff @(posedge pixel_clk) rgb <= {8'd0, 8'(cx), 8'(cy)};
-		.cx(cx),
-		.cy(cy),
+		.cx,
+		.cy,
 
 		// the screen is at the bottom right corner of the frame, namely:
 		// frame_width = screen_start_x + screen_width
 		// frame_height = screen_start_y + screen_height
-		.frame_width(frame_width),
-		.frame_height(frame_height),
-		.screen_width(screen_width),
-		.screen_height(screen_height),
-		.screen_start_x(screen_start_x),
-		.screen_start_y(screen_start_y)
+		.frame_width,
+		.frame_height,
+		.screen_width,
+		.screen_height,
+		.screen_start_x,
+		.screen_start_y
 	);	
 	
 	

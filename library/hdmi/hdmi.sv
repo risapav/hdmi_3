@@ -41,8 +41,8 @@ module hdmi
 	parameter bit [7:0] SOURCE_DEVICE_INFORMATION = 8'h00 // See README.md or CTA-861-G for the list of valid codes
 )
 (
-	input logic clk_pixel_x10,
 	input logic clk_pixel,
+	input logic clk_pixel_x10,
 	input logic clk_audio,
 	input logic [23:0] rgb, // vstup pre video data
 	input logic [AUDIO_BIT_WIDTH-1:0] audio_sample_word [1:0],
@@ -161,14 +161,17 @@ module hdmi
 				logic video_field_end;
 				assign video_field_end = cx == frame_width - 1'b1 && cy == frame_height - 1'b1;
 				logic [4:0] packet_pixel_counter;
-				localparam real VIDEO_RATE = (VIDEO_ID_CODE == 1 ? 25.2E6
+				localparam real VIDEO_RATE = (
+					VIDEO_ID_CODE == 1 ? 25.2E6
 					: VIDEO_ID_CODE == 2 || VIDEO_ID_CODE == 3 ? 27.027E6
 					: VIDEO_ID_CODE == 4 ? 74.25E6
 					: VIDEO_ID_CODE == 16 ? 148.5E6
 					: VIDEO_ID_CODE == 17 || VIDEO_ID_CODE == 18 ? 27E6
 					: VIDEO_ID_CODE == 19 ? 74.25E6
 					: VIDEO_ID_CODE == 97 || VIDEO_ID_CODE == 107 ? 594E6
-					: 0) * (VIDEO_REFRESH_RATE == 59.94 ? 1000.0/1001.0 : 1); // https://groups.google.com/forum/#!topic/sci.engr.advanced-tv/DQcGk5R_zsM
+					: 0) * (VIDEO_REFRESH_RATE == 59.94 ? 1000.0/1001.0 : 1
+				); // https://groups.google.com/forum/#!topic/sci.engr.advanced-tv/DQcGk5R_zsM
+				
 				packet_picker #(
 					.VIDEO_ID_CODE(VIDEO_ID_CODE),
 					.VIDEO_RATE(VIDEO_RATE),
@@ -178,22 +181,23 @@ module hdmi
 					.PRODUCT_DESCRIPTION(PRODUCT_DESCRIPTION),
 					.SOURCE_DEVICE_INFORMATION(SOURCE_DEVICE_INFORMATION)
 				) packet_picker (
-					.clk_pixel(clk_pixel), 
-					.clk_audio(clk_audio), 
-					.video_field_end(video_field_end), 
+					.clk_pixel, 
+					.clk_audio, 
+					.video_field_end, 
 					.packet_enable(packet_enable), 
-					.packet_pixel_counter(packet_pixel_counter), 
-					.audio_sample_word(audio_sample_word), 
-					.header(header), 
-					.sub(sub)
+					.packet_pixel_counter, 
+					.audio_sample_word, 
+					.header, 
+					.sub
 				);
+				
 				logic [8:0] packet_data;
 				packet_assembler packet_assembler (
-					.clk_pixel(clk_pixel), 
-					.data_island_period(data_island_period), 
-					.header(header), 
-					.sub(sub), 
-					.packet_data(packet_data), 
+					.clk_pixel, 
+					.data_island_period, 
+					.header, 
+					.sub, 
+					.packet_data, 
 					.counter(packet_pixel_counter)
 				);
 
@@ -228,11 +232,11 @@ module hdmi
 		begin: tmds_gen
 			tmds_channel #(.CN(i)) 
 			tmds_channel (
-				.clk_pixel(clk_pixel), 
+				.clk_pixel, 
 				.video_data(video_data[i*8+7:i*8]), 
 				.data_island_data(data_island_data[i*4+3:i*4]), 
 				.control_data(control_data[i*2+1:i*2]), 
-				.mode(mode), 
+				.mode, 
 				.tmds(tmds[i])
 			);
 		end
