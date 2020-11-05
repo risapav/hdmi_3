@@ -179,12 +179,13 @@ module hdmi
 					.AUDIO_BIT_WIDTH(AUDIO_BIT_WIDTH),
 					.VENDOR_NAME(VENDOR_NAME),
 					.PRODUCT_DESCRIPTION(PRODUCT_DESCRIPTION),
-					.SOURCE_DEVICE_INFORMATION(SOURCE_DEVICE_INFORMATION)
+					.SOURCE_DEVICE_INFORMATION(SOURCE_DEVICE_INFORMATION
+				)
 				) packet_picker (
 					.clk_pixel, 
 					.clk_audio, 
 					.video_field_end, 
-					.packet_enable(packet_enable), 
+					.packet_enable, 
 					.packet_pixel_counter, 
 					.audio_sample_word, 
 					.header, 

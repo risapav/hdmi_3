@@ -13,10 +13,9 @@ module App (
 
 	// picture 
 	logic [9:0] cx, cy, screen_start_x, screen_start_y, frame_width, frame_height, screen_width, screen_height;
-	//	//generate sound
-	logic [15:0] audio_sample_word [1:0] = '{16'sd0, 16'sd0};
-	always @(posedge clk_audio)
-		audio_sample_word <= '{audio_sample_word[0] + 16'sd1, audio_sample_word[1] - 16'sd1};
+
+//	always @(posedge clk_audio)
+//		audio_sample_word <= '{audio_sample_word[0] + 16'sd1, audio_sample_word[1] - 16'sd1};
 	//---------------------
 	//generate picture
 	//---------------------
@@ -27,12 +26,39 @@ module App (
 			rgb[15:8] <= cx[7:0] & {8{cy[6]}};
 			rgb[7:0] <= cy[7:0];
 		end
+		
+	//generate sound
+//	logic [15:0] audio_sample_word [1:0] = '{16'sd0, 16'sd0};
+	localparam AUDIO_BIT_WIDTH = 16;
+	localparam AUDIO_RATE = 44100;
+	localparam WAVE_RATE = 441;
+
+	logic [AUDIO_BIT_WIDTH-1:0] audio_sample_word [1:0];
+	logic [AUDIO_BIT_WIDTH-1:0] audio_sample_word_dampened; // This is to avoid giving you a heart attack -- it'll be really loud if it uses the full dynamic range.
+	assign audio_sample_word_dampened = audio_sample_word [1] >> 9;
+
+	sawtooth #(
+		.AUDIO_BIT_WIDTH(AUDIO_BIT_WIDTH), 
+		.SAMPLE_RATE(AUDIO_RATE), 
+		.WAVE_RATE(WAVE_RATE)
+	) 
+	sawtooth (
+		.clk_audio, 
+		.audio_sample_word
+	);
+
+		
 	//---------------------
 	// hdmi interface
 	//---------------------
 
 
-	hdmi hdmi_int
+	hdmi #(
+		.VIDEO_ID_CODE(1), 
+		.AUDIO_RATE(AUDIO_RATE), 
+		.AUDIO_BIT_WIDTH(AUDIO_BIT_WIDTH)
+	)
+	hdmi_int
 	(
 		.clk_pixel_x10(clk_pix10),
 		.clk_pixel(clk_pix),

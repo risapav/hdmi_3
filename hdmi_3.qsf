@@ -184,6 +184,7 @@ set_global_assignment -name TOP_LEVEL_ENTITY top
 
 
 
+set_global_assignment -name SYSTEMVERILOG_FILE library/sound/sawtoth.sv
 set_global_assignment -name VERILOG_FILE library/pll/pll.v
 set_global_assignment -name SYSTEMVERILOG_FILE library/hdmi/tmds_channel.sv
 set_global_assignment -name SYSTEMVERILOG_FILE library/hdmi/source_product_description_info_frame.sv
