@@ -50,10 +50,10 @@ module top
 	button,
 	led,
 	// spi interface
-	SD_MISO,
-	SD_CLK,
-	SD_MOSI,
-	SD_CS
+	spi_miso, 
+	spi_mosi,
+	spi_clk,
+	spi_cs_n
 	
 // {ALTERA_ARGS_END} DO NOT REMOVE THIS LINE!
 
@@ -94,10 +94,10 @@ output	[0:3]	led;
 output	[0:3]	tmds_p;
 output	[0:3]	tmds_n;
 // spi interface
-input		SD_MISO; 
-output	SD_CLK;
-output	SD_MOSI;
-output	SD_CS;
+input		spi_miso; 
+output	spi_mosi;
+output	spi_clk;
+output	spi_cs_n;
 	
 // {ALTERA_IO_END} DO NOT REMOVE THIS LINE!
 // {ALTERA_MODULE_BEGIN} DO NOT REMOVE THIS LINE!
@@ -159,10 +159,10 @@ output	SD_CS;
 		.tmds_p(tmds_p), 
 		.tmds_n(tmds_n),
 		// spi interface
-		.SD_MISO(SD_MISO), 
-		.SD_CLK(SD_CLK),
-		.SD_MOSI(SD_MOSI),
-		.SD_CS(SD_CS),
+		.spi_miso(spi_miso), 
+		.spi_clk(spi_clk),
+		.spi_mosi(spi_mosi),
+		.spi_cs_n(spi_cs_n),
 		// user interface
 		.button(button),
 		.led({led[1], led[2]})

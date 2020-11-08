@@ -11,10 +11,10 @@ module App (
 	output logic [0:3] tmds_p,
 	output logic [0:3] tmds_n,
 	// spi interface
-	input  wire logic SD_MISO,
-	output wire logic SD_CLK,
-	output wire logic SD_MOSI,
-	output wire logic SD_CS,
+	input  wire logic spi_miso,
+	output wire logic spi_clk,
+	output wire logic spi_mosi,
+	output wire logic spi_cs_n,
 	// user interface
 	input  logic [0:2]	button,
 	output logic [0:3]	led
@@ -115,6 +115,7 @@ module App (
 	assign SD_RESET = button[1];
 	
 	//led 3 zobrazi outreq
+	assign led[0] = outreq;
 	assign led[1] = file_found;
 
 	// For input and output definitions of this module, see sd_file_reader.sv
@@ -132,21 +133,21 @@ module App (
 		 .rst_n          ( SD_RESET         ),  // rst_n active low, re-scan and re-read SDcard by reset
 		 
 		 // signals connect to SD bus
-		 .spi_miso       ( SD_MISO    ),
-		 .spi_mosi       ( SD_MOSI    ),
-		 .spi_clk        ( SD_CLK     ),
-		 .spi_cs_n       ( SD_CS    ),
+		 .spi_miso,
+		 .spi_mosi,
+		 .spi_clk,
+		 .spi_cs_n,
 		 
 		 // display information on 12bit LED
-		 .sdcardstate    ( sdcardstate ),
-		 .sdcardtype     ( sdcardtype ),  // 0=Unknown, 1=SDv1.1 , 2=SDv2 , 3=SDHCv2
-		 .fatstate       ( fatstate ),  // 3'd6 = DONE
-		 .filesystemtype ( filesystemtype ),  // 0=Unknown, 1=invalid, 2=FAT16, 3=FAT32
-		 .file_found     ( file_found ),  // 0=file not found, 1=file found
+		 .sdcardstate,
+		 .sdcardtype,  // 0=Unknown, 1=SDv1.1 , 2=SDv2 , 3=SDHCv2
+		 .fatstate,  // 3'd6 = DONE
+		 .filesystemtype,  // 0=Unknown, 1=invalid, 2=FAT16, 3=FAT32
+		 .file_found,  // 0=file not found, 1=file found
 		 
 		 // file content output interface
-		 .outreq         ( outreq         ),
-		 .outbyte        ( outbyte        )
+		 .outreq,
+		 .outbyte
 	);
 
 
