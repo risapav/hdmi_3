@@ -1,5 +1,15 @@
 // Implementation of HDMI Spec v1.4a
 // By Sameer Puri https://github.com/sameer
+`include "OBUFDS.v"
+`include "altera_gpio_lite.sv"
+`include "packet_assembler.sv"
+`include "packet_picker.sv"
+`include "tmds_channel.sv"
+`include "source_product_description_info_frame.sv"
+`include "auxiliary_video_information_info_frame.sv"
+`include "audio_sample_packet.sv"
+`include "audio_info_frame.sv"
+`include "audio_clock_regeneration_packet.sv"
 
 module hdmi 
 #(

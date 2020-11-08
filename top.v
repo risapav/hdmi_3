@@ -43,10 +43,18 @@ module top
 	SDC,
 	uart_tx,
 	uart_rx,
-	button,
+	// hdmi interface
 	tmds_p,
 	tmds_n,
-	led
+	// user interface
+	button,
+	led,
+	// spi interface
+	SD_MISO,
+	SD_CLK,
+	SD_MOSI,
+	SD_CS
+	
 // {ALTERA_ARGS_END} DO NOT REMOVE THIS LINE!
 
 );
@@ -76,14 +84,21 @@ input			P8_14;
 input			P8_15;
 input			P8_16;
 input			SDA;
-output			SDC;
-output			uart_tx;
+output		SDC;
+output		uart_tx;
 input			uart_rx;
-input	[0:2]	button;
+// user interface
+input		[0:2]	button;
+output	[0:3]	led;
+// hdmi interface
 output	[0:3]	tmds_p;
 output	[0:3]	tmds_n;
-output	[0:3]	led;
-
+// spi interface
+input		SD_MISO; 
+output	SD_CLK;
+output	SD_MOSI;
+output	SD_CS;
+	
 // {ALTERA_IO_END} DO NOT REMOVE THIS LINE!
 // {ALTERA_MODULE_BEGIN} DO NOT REMOVE THIS LINE!
 
@@ -115,24 +130,42 @@ output	[0:3]	led;
 	//end of frequency generator
 
 	//test clock
-	Test test(
-		.CLK1(clk_pix), 
-		.CLK2(clk_pix10), 
-		.CLK3(clk_audio), 
-		.LED1(led[0]),
-		.LED2(led[1]),
-		.LED3(led[2])
-		);
+//	Test test(
+//		.CLK1(clk_pix), 
+//		.CLK2(clk_pix10), 
+//		.CLK3(clk_audio), 
+//		.LED1(led[0]),
+//		.LED2(led[1]),
+//		.LED3(led[2])
+//		);
+
+	Divider	#( 
+		.DIVISOR(25000000) 
+	) 
+	blinky(
+		.sig_in(clk_pix10),
+		.sig_out(led[0])
+	);
 	//end of test clock
 
 	//hdmi app
 	App app(
 		.rst_in(reset),
+		.clk_50(sys_clk),
 		.clk_pix(clk_pix), 
 		.clk_pix10(clk_pix10), 
 		.clk_audio(clk_audio),
+		// hdmi interface
 		.tmds_p(tmds_p), 
-		.tmds_n(tmds_n)
+		.tmds_n(tmds_n),
+		// spi interface
+		.SD_MISO(SD_MISO), 
+		.SD_CLK(SD_CLK),
+		.SD_MOSI(SD_MOSI),
+		.SD_CS(SD_CS),
+		// user interface
+		.button(button),
+		.led({led[1], led[2]})
 		);
 // {ALTERA_MODULE_END} DO NOT REMOVE THIS LINE!
 endmodule
